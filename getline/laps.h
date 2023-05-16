@@ -10,7 +10,8 @@ typedef struct list_t {
     struct list_t *next;
 } car_list;
 
-
+void free_list(car_list *head);
+void print_list(car_list **head);
 car_list *add_nodeint(car_list **head, const int car, int lap);
 void race_state(int *id, size_t size);
 
