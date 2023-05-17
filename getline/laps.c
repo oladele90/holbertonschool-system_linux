@@ -15,35 +15,17 @@ void race_state(int *id, size_t size)
         for (i = 0; i < size; i++)
         {
             add_nodeint(&new, id[i], 0);
-            printf("Car %d joined the race\n", new->car);
+            printf("Car %lu joined the race\n", new->car);
         }
     }
     else
     {
         size_t i;
         for (i = 0; i < size; i++)
-        {
-            car_list *temp = new;
-            while (temp)
-            {
-                if (id[i] == temp->car)
-                {
-                    temp->lap = temp->lap + 1;
-                    temp = temp->next;
-                    break;
-                }
-                else if ((id[i] != temp->car) && (temp->next == NULL))
-                {
-                    add_nodeint(&new, id[i], 0);
-                    printf("Car %d joined the race\n", new->car);
-                }
-                temp = temp ->next;
-            }
-        }
+            check_id(&new, id[i]);
     }
     printf("Race state:\n");
     print_list(&new);
-
 }
 
 void print_list(car_list **head)
@@ -52,7 +34,7 @@ void print_list(car_list **head)
 
     while (temp)
     {
-        printf("Car %d [%d laps]\n", temp->car, temp->lap);
+        printf("Car %lu [%d laps]\n", temp->car, temp->lap);
 		temp = temp->next;
     }
 }
@@ -87,4 +69,24 @@ void free_list(car_list *head)
         free(head);
         head = temp;
     }
+}
+
+void check_id(car_list **head, size_t id)
+{
+    car_list *temp = *head;
+    while (temp)
+        {
+            if (id == temp->car)
+                {
+                    temp->lap = temp->lap + 1;
+                    temp = temp->next;
+                    break;
+                }
+                else if ((id != temp->car) && (temp->next == NULL))
+                {
+                    add_nodeint(head, id, 0);
+                    printf("Car %lu joined the race\n", (*head)->car);
+                }
+                temp = temp ->next;
+        }
 }
