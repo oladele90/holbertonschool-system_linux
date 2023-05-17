@@ -4,10 +4,11 @@
 #include <string.h>
 #include <stdio.h>
 
-typedef struct list_t {
-    size_t car;
-    int lap;
-    struct list_t *next;
+typedef struct list_t
+{
+	size_t car;
+	int lap;
+	struct list_t *next;
 } car_list;
 
 void check_id(car_list **head, size_t id);
