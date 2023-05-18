@@ -120,10 +120,10 @@ void check_id(car_list **head, size_t id)
 			break;
 		}
 		else if ((id != temp->car) && (temp->next == NULL))
-			{
-				add_nodeint(&(*head), id, 0);
-				return;
-			}
+		{
+			add_nodeint(&(*head), id, 0);
+			return;
+		}
 		temp = temp->next;
 	}
 }
