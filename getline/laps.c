@@ -1,4 +1,9 @@
 #include "laps.h"
+/**
+ * race_state - finction to keep track or laps made
+ * @id: array of car identifiers
+ * @size: size of array
+*/
 
 void race_state(int *id, size_t size)
 {
@@ -30,6 +35,11 @@ void race_state(int *id, size_t size)
 	print_list(&new);
 }
 
+/**
+ * print_list - prints list prints list of cars and the laps each car has made
+ * @head: pointer to static variable
+*/
+
 void print_list(car_list **head)
 {
 	car_list *temp = *head;
@@ -41,26 +51,50 @@ void print_list(car_list **head)
 	}
 }
 
-
+/**
+ * add_nodeint - adds a node to the linked list
+ * @head: pointer to address of linked list
+ * @car: identifier of car
+ * @lap: number of laps to initialize car with
+ * Return: car_list struct
+*/
 
 car_list *add_nodeint(car_list **head, const int car, int lap)
 {
-	car_list *front;
+	car_list *current;
+	car_list *surfer;
 
-
-	front = malloc(sizeof(car_list));
-	if (!front)
+	current = malloc(sizeof(car_list));
+	if (!current)
 	{
-		free(front);
+		free(current);
 		return (NULL);
 	}
-	front->car = car;
-	front->lap = lap;
-	front->next = *head;
-	*head = front;
-	return (front);
+	current->car = car;
+	current->lap = lap;
+	if (*head == NULL || (*head)->car >= current->car)
+	{
+		current->next = *head;
+		*head = current;
+		return (*head);
+	}
+	else
+	{
+		surfer = *head;
+		while (surfer->next != NULL && surfer->next->car < current->car)
+		{
+			surfer = surfer->next;
+			printf("%lu", surfer->car);
+		}
+	}
+	current->next = surfer->next;
+	surfer->next = current;
+	return (*head);
 }
-
+/**
+ * free_list - frees the allocated memory
+ * @head: pointer to linked list
+*/
 void free_list(car_list *head)
 {
 	car_list *temp;
@@ -72,7 +106,11 @@ void free_list(car_list *head)
 		head = temp;
 	}
 }
-
+/**
+ * check_id - checks linked list to see if car is known
+ * @head: pointer to address of linked list
+ * @id: car id that is being checked for
+*/
 void check_id(car_list **head, size_t id)
 {
 	car_list *temp = *head;

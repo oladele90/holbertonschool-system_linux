@@ -3,7 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
+/**
+ * struct list_t - holds each car's data
+ * @car: id of car
+ * @lap: laps made by car
+ * @next: next car in list
+ * Description: singly linked list struct
+*/
 typedef struct list_t
 {
 	size_t car;
