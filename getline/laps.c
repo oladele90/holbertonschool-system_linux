@@ -82,10 +82,7 @@ car_list *add_nodeint(car_list **head, const int car, int lap)
 	{
 		surfer = *head;
 		while (surfer->next != NULL && surfer->next->car < current->car)
-		{
 			surfer = surfer->next;
-			printf("%lu", surfer->car);
-		}
 	}
 	current->next = surfer->next;
 	surfer->next = current;
