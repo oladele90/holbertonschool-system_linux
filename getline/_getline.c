@@ -7,7 +7,7 @@ char *_getline(const int fd)
     static ssize_t read_bytes;
     size_t total_size = 0;
     static char r_buf[READ_SIZE];
-    char *string_form = calloc(total_size + 1, sizeof(char));
+    char *string_form = malloc(sizeof(char) * READ_SIZE);
     for (; buf_probe < READ_SIZE && read_bytes == READ_SIZE; buf_probe++)
     {
         if (r_buf[buf_probe] == '\n')
