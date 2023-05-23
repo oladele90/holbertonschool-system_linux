@@ -19,15 +19,8 @@ char *_getline(const int fd)
 			{
 				if (line_length == 0)
 					return (NULL);
+				line = realloc(line, line_length + 1);
 
-				char *temp = realloc(line, line_length + 1);
-
-				if (!temp)
-				{
-					free(line);
-					return (NULL);
-				}
-				line = temp;
 				line[line_length] = '\0';
 				return (line);
 			}
@@ -36,26 +29,14 @@ char *_getline(const int fd)
 		{
 			if (buffer[buffer_index] == '\n')
 			{
-				char *temp = realloc(line, line_length + 1);
+				line = realloc(line, line_length + 1);
 
-				if (!temp)
-				{
-					free(line);
-					return (NULL);
-				}
-				line = temp;
 				line[line_length] = '\0';
 				buffer_index++;
 				return (line);
 			}
-				char *temp = realloc(line, line_length + 1);
+				line = realloc(line, line_length + 1);
 
-				if (!temp)
-				{
-					free(line);
-					return (NULL);
-				}
-				line = temp;
 				line[line_length] = buffer[buffer_index];
 				line_length++;
 				buffer_index++;
