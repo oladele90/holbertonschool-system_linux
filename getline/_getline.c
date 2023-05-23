@@ -1,4 +1,9 @@
 #include "_getline.h"
+/**
+ * _getline - retrieves lines frome files
+ * @fd: file to retrieve lines from
+ * Return: line from file with null terminating byte
+*/
 
 char *_getline(const int fd)
 {
