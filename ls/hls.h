@@ -12,6 +12,7 @@ typedef struct dirlist {
 	int next;
 } dlist;
 
+size_t count_ent(const char *path);
 void print_ent(dlist *entryInfos);
 dlist *hls(const char *path, dlist *entryInfos);
 #endif
