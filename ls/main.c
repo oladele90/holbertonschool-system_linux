@@ -19,4 +19,5 @@ int main(int argc, char **argv)
 	}
 	print_ent(entryInfos);
 	free(entryInfos);
+	return (1);
 }
