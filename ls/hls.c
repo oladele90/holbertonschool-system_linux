@@ -14,8 +14,8 @@ dlist *hls(const char *path, dlist *entryInfos)
 	}
 	while ((entry = readdir(dir)) != NULL) 
 	{
-		entryInfos = (dlist *)realloc(entryInfos, (num_entries + 1) * sizeof(dlist));
 		char fullpath[PATH_MAX];
+		entryInfos = (dlist *)realloc(entryInfos, (num_entries + 1) * sizeof(dlist));
 		if (entryInfos == NULL)
 		{
 			perror("realloc");
