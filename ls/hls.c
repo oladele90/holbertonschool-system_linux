@@ -22,8 +22,8 @@ dlist *hls(const char *path, dlist *entryInfos)
 	}
 	for (i = 0; i < num_entries; i++) 
 	{
-		entry = readdir(dir);
 		char fullpath[PATH_MAX];
+		entry = readdir(dir);
 		entryInfos[i].entry = entry;
 		sprintf(fullpath, "%s/%s", path, entry->d_name);
 	   if (lstat(fullpath, &entryInfos[i].info) == -1) 
