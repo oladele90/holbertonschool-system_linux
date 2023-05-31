@@ -7,9 +7,9 @@
 #include <sys/types.h>
 #include <string.h>
 typedef struct dirlist {
-    struct dirent *entry;
-    struct stat info;
-    int next;
+	struct dirent *entry;
+	struct stat info;
+	int next;
 } dlist;
 
 void print_ent(dlist *entryInfos);
