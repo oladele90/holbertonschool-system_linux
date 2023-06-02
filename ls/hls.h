@@ -9,7 +9,6 @@
 typedef struct dirlist {
 	struct dirent *entry;
 	struct stat info;
-	int next;
 } dlist;
 
 size_t count_ent(const char *path);

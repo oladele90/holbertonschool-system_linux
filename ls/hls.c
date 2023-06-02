@@ -14,7 +14,7 @@ dlist *hls(const char *path, dlist *entryInfos)
 		perror("opendir");
 		exit(EXIT_FAILURE);
 	}
-	entryInfos = (dlist *)malloc(num_entries * sizeof(dlist));
+	entryInfos = (dlist *)malloc((num_entries + 1) * sizeof(dlist));
     if (entryInfos == NULL)
 	{
         perror("malloc");
@@ -24,7 +24,8 @@ dlist *hls(const char *path, dlist *entryInfos)
 	{
 		char fullpath[PATH_MAX];
 		entry = readdir(dir);
-		entryInfos[i].entry = entry;
+		entryInfos[i].entry = malloc(sizeof(struct dirent));
+		sprintf(entryInfos[i].entry->d_name, "%s", entry->d_name);
 		sprintf(fullpath, "%s/%s", path, entry->d_name);
 	   if (lstat(fullpath, &entryInfos[i].info) == -1) 
 	   {
@@ -32,7 +33,7 @@ dlist *hls(const char *path, dlist *entryInfos)
 			continue;
 	   }
 	}
-	entryInfos[num_entries].next = 1;
+	entryInfos[num_entries].entry = NULL;
 	closedir(dir);
 	return (entryInfos);
 }
