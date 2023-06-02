@@ -25,7 +25,6 @@ dlist *hls(const char *path, dlist *entryInfos)
 		char fullpath[PATH_MAX];
 		entry = readdir(dir);
 		entryInfos[i].entry = malloc(sizeof(struct dirent));
-		//sprintf(entryInfos[i].entry->d_name, "%s", entry->d_name);
 		copy_d_name(entry, entryInfos[i].entry->d_name);
 		sprintf(fullpath, "%s/%s", path, entry->d_name);
 	   if (lstat(fullpath, &entryInfos[i].info) == -1) 
