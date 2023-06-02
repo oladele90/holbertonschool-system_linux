@@ -1,9 +1,18 @@
 #include "hls.h"
 
+/**
+ * main - runs hls on argv
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: exit status
+*/
+
 int main(int argc, char **argv)
 {
 	int i;
-	static dlist *entryInfos = NULL;
+
+	static dlist *entryInfos;
+
 	if (argc == 1)
 	{
 		entryInfos = hls(".", entryInfos);
@@ -13,6 +22,7 @@ int main(int argc, char **argv)
 	if (argc > 1)
 	{
 		int j = 1;
+
 		while (j < argc)
 		{
 			entryInfos = hls(argv[j], entryInfos);

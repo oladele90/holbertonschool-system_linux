@@ -1,14 +1,27 @@
 #include "hls.h"
 
+/**
+* print_ent - prints list of entries
+* @entryInfos: the array of entries
+* Return: void
+*/
+
 void print_ent(dlist *entryInfos)
 {
 	int i = 0;
+
 	for (i = 0; entryInfos[i].entry != NULL; i++)
 	{
 		if (entryInfos[i].entry->d_name[0] != '.')
 			printf("%s\n", entryInfos[i].entry->d_name);
 	}
 }
+
+/**
+* count_ent - counts entrys in directory
+* @path: the directory
+* Return: number of entries
+*/
 
 size_t count_ent(const char *path)
 {
@@ -17,27 +30,36 @@ size_t count_ent(const char *path)
 	size_t num_entries = 0;
 
 	dir = opendir(path);
-	if (dir == NULL) {
+	if (dir == NULL)
+	{
 		perror("opendir");
 		exit(EXIT_FAILURE);
 	}
-	while ((entry = readdir(dir)) != NULL) 
+	while ((entry = readdir(dir)) != NULL)
 		num_entries++;
 	closedir(dir);
 	return (num_entries);
 }
 
-void copy_d_name(const struct dirent *entry, char *dest) {
-    size_t i;
-    for (i = 0; entry->d_name[i] != '\0'; i++) {
-        dest[i] = entry->d_name[i];
-    }
-    dest[i] = '\0';
+/**
+* copy_d_name - copies entry->d_nmae to buffer
+* @entry: the entry
+* @dest: the buffer
+* Return: void
+*/
+
+void copy_d_name(const struct dirent *entry, char *dest)
+{
+	size_t i;
+
+	for (i = 0; entry->d_name[i] != '\0'; i++)
+		dest[i] = entry->d_name[i];
+	dest[i] = '\0';
 }
 
 /**
 * sortStruct - Sorts structs by file name alphabetically
-* @fileList: the array to be sorted
+* @entry: the array to be sorted
 * Return: void
 */
 
@@ -52,11 +74,11 @@ dlist *sortStruct(dlist *entry)
 	{
 		swap = compareString(entry[i].entry->d_name, entry[i + 1].entry->d_name);
 		if (swap == 1)
-		{   
+		{
 			temp = entry[i];
 			temp2 = entry[i + 1];
 			entry[i] = temp2;
-			entry[i+1] = temp;
+			entry[i + 1] = temp;
 			i = 0;
 		}
 		else
@@ -77,40 +99,26 @@ int compareString(char *string1, char *string2)
 	char stringValue1;
 	char stringValue2;
 
-	while(string1[i] != '\0')
+	while (string1[i] != '\0')
 	{
 		stringValue1 = string1[i];
 		stringValue2 = string2[i];
 
-        if (stringValue1 == '\0' && stringValue2 == '\0')
-        {
-            return (-1);
-        }
-        if (stringValue1 == '\0' && stringValue2 != '\0')
-        {
-            return (0);
-        }
-        if (stringValue1 != '\0' && stringValue2 == '\0')
-        {
-            return (1);
-        }
-		if(stringValue1 > 64 && stringValue1 < 91)
-		{
-			stringValue1 += 32;
-		}
-		if(stringValue2 > 64 && stringValue2 < 91)
-		{
-			stringValue2 += 32;
-		}
-		if (stringValue1 > stringValue2)
-		{
-			return (1);
-		}
-		if (stringValue1 < stringValue2)
-		{
+		if (stringValue1 == '\0' && stringValue2 == '\0')
+			return (-1);
+		if (stringValue1 == '\0' && stringValue2 != '\0')
 			return (0);
-		}
+		if (stringValue1 != '\0' && stringValue2 == '\0')
+			return (1);
+		if (stringValue1 > 64 && stringValue1 < 91)
+			stringValue1 += 32;
+		if (stringValue2 > 64 && stringValue2 < 91)
+			stringValue2 += 32;
+		if (stringValue1 > stringValue2)
+			return (1);
+		if (stringValue1 < stringValue2)
+			return (0);
 		i++;
 	}
-    return (-1);
+	return (-1);
 }

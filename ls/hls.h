@@ -7,7 +7,16 @@
 #include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
-typedef struct dirlist {
+
+/**
+ * struct dirlist - holds directory data
+ * @entry: dirent struct
+ * @info: stat struct
+ * Description: holds info needed to print ls
+*/
+
+typedef struct dirlist
+{
 	struct dirent *entry;
 	struct stat info;
 } dlist;
