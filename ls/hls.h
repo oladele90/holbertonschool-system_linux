@@ -12,7 +12,7 @@ typedef struct dirlist {
 	struct stat info;
 } dlist;
 
-void sortStruct(dlist *entry);
+dlist *sortStruct(dlist *entry);
 int compareString(char *string1, char *string2);
 void copy_d_name(const struct dirent *entry, char *dest);
 size_t count_ent(const char *path);

@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 	if (argc == 1)
 	{
 		entryInfos = hls(".", entryInfos);
-		sortStruct(entryInfos);
+		entryInfos = sortStruct(entryInfos);
 		print_ent(entryInfos);
 	}
 	if (argc > 1)

@@ -41,7 +41,7 @@ void copy_d_name(const struct dirent *entry, char *dest) {
 * Return: void
 */
 
-void sortStruct(dlist *entry)
+dlist *sortStruct(dlist *entry)
 {
 	size_t i = 0;
 	dlist temp;
@@ -51,20 +51,20 @@ void sortStruct(dlist *entry)
 	while (entry[i + 1].entry != NULL)
 	{
 		swap = compareString(entry[i].entry->d_name, entry[i + 1].entry->d_name);
-			if (swap == 1)
-			{   
-				temp = entry[i];
-				temp2 = entry[i + 1];
-				entry[i] = temp2;
-				entry[i+1] = temp;
-				i++;
-			}
-			else 
-			{
+		if (swap == 1)
+		{   
+			temp = entry[i];
+			temp2 = entry[i + 1];
+			entry[i] = temp2;
+			entry[i+1] = temp;
+			i = 0;
+		}
+		else
 			i++;
-			}
 	}
+	return (entry);
 }
+
 /**
 * compareString - compares two strings for sorting alphabetically
 * @string1: string to compare
