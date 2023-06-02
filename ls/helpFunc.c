@@ -34,3 +34,83 @@ void copy_d_name(const struct dirent *entry, char *dest) {
     }
     dest[i] = '\0';
 }
+
+/**
+* sortStruct - Sorts structs by file name alphabetically
+* @fileList: the array to be sorted
+* Return: void
+*/
+
+void sortStruct(dlist *entry)
+{
+	size_t i = 0;
+	dlist temp;
+	dlist temp2;
+	int swap = 0;
+
+	while (entry[i + 1].entry != NULL)
+	{
+		swap = compareString(entry[i].entry->d_name, entry[i + 1].entry->d_name);
+			if (swap == 1)
+			{   
+				temp = entry[i];
+				temp2 = entry[i + 1];
+				entry[i] = temp2;
+				entry[i+1] = temp;
+				i++;
+			}
+			else 
+			{
+			i++;
+			}
+	}
+}
+/**
+* compareString - compares two strings for sorting alphabetically
+* @string1: string to compare
+* @string2: string to compare to
+* Return: 1 to swap, 0 if not -1 on error
+*/
+int compareString(char *string1, char *string2)
+{
+	int i = 0;
+	char stringValue1;
+	char stringValue2;
+
+	while(string1[i] != '\0')
+	{
+		stringValue1 = string1[i];
+		stringValue2 = string2[i];
+
+        if (stringValue1 == '\0' && stringValue2 == '\0')
+        {
+            return (-1);
+        }
+        if (stringValue1 == '\0' && stringValue2 != '\0')
+        {
+            return (0);
+        }
+        if (stringValue1 != '\0' && stringValue2 == '\0')
+        {
+            return (1);
+        }
+		if(stringValue1 > 64 && stringValue1 < 91)
+		{
+			stringValue1 += 32;
+		}
+		if(stringValue2 > 64 && stringValue2 < 91)
+		{
+			stringValue2 += 32;
+		}
+		if (stringValue1 > stringValue2)
+		{
+			return (1);
+		}
+		if (stringValue1 < stringValue2)
+		{
+			return (0);
+		}
+		i++;
+	}
+    return (-1);
+}
