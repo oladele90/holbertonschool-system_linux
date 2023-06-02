@@ -26,3 +26,11 @@ size_t count_ent(const char *path)
 	closedir(dir);
 	return (num_entries);
 }
+
+void copy_d_name(const struct dirent *entry, char *dest) {
+    size_t i;
+    for (i = 0; entry->d_name[i] != '\0'; i++) {
+        dest[i] = entry->d_name[i];
+    }
+    dest[i] = '\0';
+}

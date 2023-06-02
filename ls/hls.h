@@ -6,11 +6,13 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
+#include <unistd.h>
 typedef struct dirlist {
 	struct dirent *entry;
 	struct stat info;
 } dlist;
 
+void copy_d_name(const struct dirent *entry, char *dest);
 size_t count_ent(const char *path);
 void print_ent(dlist *entryInfos);
 dlist *hls(const char *path, dlist *entryInfos);
