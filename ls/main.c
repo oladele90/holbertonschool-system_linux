@@ -9,9 +9,10 @@
 
 int main(int argc, char **argv)
 {
-	int i;
-
+	int i, check, argcount = 0, multiHls;
+	char *arglist[10], flag;
 	static dlist *entryInfos;
+
 
 	if (argc == 1)
 	{
@@ -21,17 +22,37 @@ int main(int argc, char **argv)
 	}
 	if (argc > 1)
 	{
-		int j = 1;
-
-		while (j < argc)
+		for (i = 1; i < argc; i++)
 		{
-			entryInfos = hls(argv[j], entryInfos);
-			print_ent(entryInfos);
-			j++;
+			if (argv[i][0] == '-')
+				flag = argv[i][1];
+			else
+				{
+					check = checkArg(argv[i], argv);
+            		if (check == 1)
+					{
+                		arglist[argcount] = argv[i];
+						argcount++;
+					}
+					else 
+						multiHls = 1;
+				}
+			if (argcount > 1)
+				multiHls = 1;
 		}
+		for (i = 0; i < argcount; i++)
+		{
+			if (multiHls ==1)
+				printf("%s:\n", arglist[i]);
+			entryInfos = hls(".", entryInfos);
+			entryInfos = sortStruct(entryInfos);
+			selectPrint(entryInfos, flag);
+			for (i = 0; entryInfos[i].entry != NULL; i++)
+			free(entryInfos[i].entry);
+			free(entryInfos);
+			printf("\n");
+		}
+
 	}
-	for (i = 0; entryInfos[i].entry != NULL; i++)
-		free(entryInfos[i].entry);
-	free(entryInfos);
 	return (0);
 }

@@ -21,6 +21,10 @@ typedef struct dirlist
 	struct stat info;
 } dlist;
 
+void printa(dlist *entryInfoss);
+void printA(dlist *entryInfos);
+void selectPrint(dlist *entryInfos, char flag);
+int checkArg(char *arg, char **argv);
 dlist *sortStruct(dlist *entry);
 int compareString(char *string1, char *string2);
 void copy_d_name(const struct dirent *entry, char *dest);
