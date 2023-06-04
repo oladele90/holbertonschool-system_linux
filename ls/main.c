@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv)
 {
-	int i, check, argcount = 0, multiHls = 0;
+	int i, x, check, argcount = 0, multiHls = 0;
 	char *arglist[10], flag = 1;
 	static dlist *entryInfos = NULL;
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 			entryInfos = hls(arglist[i], entryInfos);
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
-			for (i = 0; entryInfos[i].entry != NULL; i++)
+			for (x = 0; entryInfos[i].entry != NULL; x++)
 				free(entryInfos[i].entry);
 			free(entryInfos);
 			printf("\n");
