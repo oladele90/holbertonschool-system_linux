@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
 			for (x = 0; entryInfos[x].entry != NULL; x++)
-			free(entryInfos[i].entry);
+			free(entryInfos[x].entry);
 			free(entryInfos);
 			printf("\n");
 		}
