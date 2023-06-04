@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	int i, x, check, argcount = 0, multiHls = 0;
+	int i, x, check = 2, argcount = 0, multiHls = 0;
 	char *arglist[10], flag = '1';
 	static dlist *entryInfos = NULL;
 
