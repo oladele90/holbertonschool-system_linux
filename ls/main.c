@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
 	int i, check, argcount = 0, multiHls = 0;
-	char *arglist[10], flag;
+	char *arglist[10], flag = 1;
 	dlist *entryInfos = NULL;
 
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 		{
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
-			entryInfos = hls(".", entryInfos);
+			entryInfos = hls(arglist[i], entryInfos);
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
 			for (i = 0; entryInfos[i].entry != NULL; i++)
@@ -52,7 +52,6 @@ int main(int argc, char **argv)
 			free(entryInfos);
 			printf("\n");
 		}
-
 	}
 	return (0);
 }
