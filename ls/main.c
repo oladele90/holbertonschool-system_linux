@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		{
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
-			entryInfos = hls(".", entryInfos);
+			entryInfos = hls(arglist[argcount], entryInfos);
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
 			for (i = 0; entryInfos[i].entry != NULL; i++)
