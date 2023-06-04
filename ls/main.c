@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 			entryInfos = hls(arglist[i], entryInfos);
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
-			for (x = 0; entryInfos[i].entry != NULL; x++)
+			for (x = 0; entryInfos[x].entry != NULL; x++)
 				free(entryInfos[i].entry);
 			free(entryInfos);
 			printf("\n");
