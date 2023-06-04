@@ -6,7 +6,7 @@ int checkArg(char *arg, char **argv)
 
     if (lstat(arg, &check) == -1)
     {
-        fprintf(stderr, "%s: cannot access %s: No such file or directory\n\n",argv[0] ,arg);
+        fprintf(stderr, "%s: cannot access %s: No such file or directory\n",argv[0] ,arg);
         return (-1);
     }
     if (S_ISREG(check.st_mode))
@@ -18,7 +18,7 @@ int checkArg(char *arg, char **argv)
     {
         if ((check.st_mode & S_IRUSR) == 0 || (check.st_mode & S_IXUSR) == 0)
         {
-            fprintf(stderr, "%s: cannot open directory %s: Permission denied\n\n",argv[0] ,arg);
+            fprintf(stderr, "%s: cannot open directory %s: Permission denied\n",argv[0] ,arg);
             return (-1);
         }
         return (1);
