@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 				free(entryInfos);
 				printf("\n");
 			}
-	}
+		}
 	return (0);
+	}
 }
