@@ -38,9 +38,9 @@ void printa(dlist *entryInfos)
 
 void printA(dlist *entryInfos)
 {
-    int i = 2;
+    int i;
 
-	for (i = 0; entryInfos[i].entry != NULL; i++)
+	for (i = 2; entryInfos[i].entry != NULL; i++)
 			printf("%s\n", entryInfos[i].entry->d_name);
 }
 
