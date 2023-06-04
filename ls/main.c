@@ -1,16 +1,9 @@
 #include "hls.h"
 
-/**
- * main - runs hls on argv
- * @argc: argument count
- * @argv: argument vector
- * Return: exit status
-*/
-
 int main(int argc, char **argv)
 {
-	int i, x, check, argcount = 0, multiHls = 0;
-	char *arglist[10], flag = 1;
+	int i, check, argcount = 0, multiHls = 0;
+	char *arglist[10], flag = '1';
 	static dlist *entryInfos = NULL;
 
 
@@ -44,16 +37,15 @@ int main(int argc, char **argv)
 		{
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
-			entryInfos = hls(arglist[i], entryInfos);
+			entryInfos = hls(".", entryInfos);
 			entryInfos = sortStruct(entryInfos);
 			selectPrint(entryInfos, flag);
-			for (x = 0; entryInfos[x].entry != NULL; x++)
-			{
-				free(entryInfos[i].entry);
-				free(entryInfos);
-				printf("\n");
-			}
+			for (i = 0; entryInfos[i].entry != NULL; i++)
+			free(entryInfos[i].entry->d_name);
+			free(entryInfos);
+			printf("\n");
 		}
+
 	}
 	return (0);
 }
