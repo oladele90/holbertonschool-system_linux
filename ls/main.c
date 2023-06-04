@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	static int printer;
+	//static int printer;
 	int i, x, check = 2, argcount = 0, multiHls = 0;
 	char *arglist[10], flag = '1';
 	static dlist *entryInfos = NULL;
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 					{
                 		arglist[argcount] = argv[i];
 						argcount++;
-						printer = 2;
+						//printer = 2;
 					}
 					else
 						multiHls = 1;
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 			if (argcount > 1)
 				multiHls = 1;
 		}
-		if ((check == 0 || check == -1) && printer == 2)
+		if ((check == 0 || check == -1) && argc > 1)
 			printf("\n");
 		for (i = 0; i < argcount; i++)
 		{
