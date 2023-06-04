@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
 	int i, check, argcount = 0, multiHls = 0;
 	char *arglist[10], flag = 1;
-	dlist *entryInfos = NULL;
+	static dlist *entryInfos = NULL;
 
 
 	if (argc == 1)
