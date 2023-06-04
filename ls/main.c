@@ -33,6 +33,8 @@ int main(int argc, char **argv)
 			if (argcount > 1)
 				multiHls = 1;
 		}
+		if ((check == 0 || check == -1) && argcount > 0)
+			printf(\n);
 		for (i = 0; i < argcount; i++)
 		{
 			if (multiHls == 1)
