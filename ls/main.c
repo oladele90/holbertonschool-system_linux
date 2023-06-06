@@ -4,8 +4,9 @@ int main(int argc, char **argv)
 {
 	int i, x, check = 2, argcount = 0, multiHls = 0;
 	char *arglist[10], flag = '1';
+	static char *folders[10];
 	static dlist *entryInfos = NULL;
-
+	static int folders_count = 0;
 
 	if (argc == 1)
 	{
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
 				flag = argv[i][1];
 			else
 				{
-					check = checkArg(argv[i], argv);
+					check = checkArg(argv[i], argv, folders, folders_count);
             		if (check == 1)
 					{
                 		arglist[argcount] = argv[i];
@@ -37,6 +38,8 @@ int main(int argc, char **argv)
 			printf("\n");
 		for (i = 0; i < argcount; i++)
 		{
+			for (x = 0; (x < folders_count)&& flag != 'l'; x++)
+				printf("%s\n", folders[x]);
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
 			entryInfos = hls(arglist[i], entryInfos);
