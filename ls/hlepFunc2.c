@@ -65,11 +65,12 @@ void printl(dlist *entryInfos)
 
     for (i = 0; entryInfos[i].entry != NULL; i++)
 	{
+        char month[4], day[3], hour[3], minute[3];
         struct passwd *owner_info = getpwuid(entryInfos[i].info.st_uid);
         struct group *group_info = getgrgid(entryInfos[i].info.st_gid);
-        char time_buf[80];
-        strftime(time_buf, sizeof(time_buf), "%b %e %H:%M", localtime(&entryInfos[i].info.st_mtime));
-        
+        time_t mod_time = entryInfos[i].info.st_mtime;
+        char *time_str = ctime(&mod_time);
+
 		if (entryInfos[i].entry->d_name[0] != '.')
         {
             printf((S_ISREG(entryInfos[i].info.st_mode)) ? "-" : "d");
@@ -93,9 +94,30 @@ void printl(dlist *entryInfos)
 
             printf("%10ld", entryInfos[i].info.st_size);
 
-            printf(" %s", time_buf);
+            extract_time(time_str, month, day, hour, minute);
+            printf("Modified time: %s %s %s:%s\n", month, day, hour, minute);
 
             printf(" %s\n", entryInfos[i].entry->d_name);
         }
     }
+}
+
+void extract_time(char *time_str, char* month, char* day, char* hour, char* minute) 
+{
+    month[0] = time_str[4];
+    month[1] = time_str[5];
+    month[2] = time_str[6];
+    month[3] = '\0';
+
+    day[0] = time_str[8];
+    day[1] = time_str[9];
+    day[2] = '\0';
+
+    hour[0] = time_str[11];
+    hour[1] = time_str[12];
+    hour[2] = '\0';
+
+    minute[0] = time_str[14];
+    minute[1] = time_str[15];
+    minute[2] = '\0';
 }

@@ -24,6 +24,7 @@ typedef struct dirlist
 	struct stat info;
 } dlist;
 
+void extract_time(char *time_str, char* month, char* day, char* hour, char* minute);
 void printl(dlist *entryInfos);
 void printa(dlist *entryInfoss);
 void printA(dlist *entryInfos);
