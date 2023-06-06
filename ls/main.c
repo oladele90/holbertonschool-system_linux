@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 			printf("\n");
 		for (i = 0; i < argcount; i++)
 		{
-			for (x = 0; (x < folders_count)&& flag != 'l'; x++)
+			for (x = 0; (x < folders_count)&& (flag != 'l'); x++)
 				printf("%s\n", folders[x]);
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
