@@ -62,8 +62,14 @@ void selectPrint(dlist *entryInfos, char flag)
 void printl(dlist *entryInfos)
 {
     int i;
+
     for (i = 0; entryInfos[i].entry != NULL; i++)
 	{
+        struct passwd *owner_info = getpwuid(entryInfos[i].info.st_uid);
+        struct group *group_info = getgrgid(entryInfos[i].info.st_gid);
+        char time_buf[80];
+        strftime(time_buf, sizeof(time_buf), "%b %e %H:%M", localtime(&entryInfos[i].info.st_mtime));
+        
 		if (entryInfos[i].entry->d_name[0] != '.')
         {
             printf((S_ISREG(entryInfos[i].info.st_mode)) ? "-" : "d");
@@ -79,18 +85,14 @@ void printl(dlist *entryInfos)
 
             printf("%ld", entryInfos[i].info.st_nlink);
 
-            struct passwd *owner_info = getpwuid(entryInfos[i].info.st_uid);
             if (owner_info != NULL)
                 printf("%s ", owner_info->pw_name);
 
-            struct group *group_info = getgrgid(entryInfos[i].info.st_gid);
             if (group_info != NULL)
                 printf("%s", group_info->gr_name);
 
             printf("%10ld", entryInfos[i].info.st_size);
 
-            char time_buf[80];
-            strftime(time_buf, sizeof(time_buf), "%b %e %H:%M", localtime(&entryInfos[i].info.st_mtime));
             printf(" %s", time_buf);
 
             printf(" %s\n", entryInfos[i].entry->d_name);
