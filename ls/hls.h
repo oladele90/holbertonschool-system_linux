@@ -7,6 +7,9 @@
 #include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
+#include <pwd.h>
+#include <grp.h>
 
 /**
  * struct dirlist - holds directory data
@@ -21,6 +24,7 @@ typedef struct dirlist
 	struct stat info;
 } dlist;
 
+void printl(dlist *entryInfos);
 void printa(dlist *entryInfoss);
 void printA(dlist *entryInfos);
 void selectPrint(dlist *entryInfos, char flag);

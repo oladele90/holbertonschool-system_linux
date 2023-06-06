@@ -54,4 +54,46 @@ void selectPrint(dlist *entryInfos, char flag)
     
     if (flag == 'A')
         printA(entryInfos);
+
+    if (flag == 'l')
+        printl(entryInfos);
+}
+
+void printl(dlist *entryInfos)
+{
+    int i;
+    for (i = 0; entryInfos[i].entry != NULL; i++)
+	{
+		if (entryInfos[i].entry->d_name[0] != '.')
+        {
+            printf((S_ISREG(entryInfos[i].info.st_mode)) ? "-" : "d");
+            printf((entryInfos[i].info.st_mode & S_IRUSR) ? "r" : "-");
+            printf((entryInfos[i].info.st_mode & S_IWUSR) ? "w" : "-");
+            printf((entryInfos[i].info.st_mode & S_IXUSR) ? "x" : "-");
+            printf((entryInfos[i].info.st_mode & S_IRGRP) ? "r" : "-");
+            printf((entryInfos[i].info.st_mode & S_IWGRP) ? "w" : "-");
+            printf((entryInfos[i].info.st_mode & S_IXGRP) ? "x" : "-");
+            printf((entryInfos[i].info.st_mode & S_IROTH) ? "r" : "-");
+            printf((entryInfos[i].info.st_mode & S_IWOTH) ? "w" : "-");
+            printf((entryInfos[i].info.st_mode & S_IXOTH) ? "x" : "-");
+
+            printf("%ld", entryInfos[i].info.st_nlink);
+
+            struct passwd *owner_info = getpwuid(entryInfos[i].info.st_uid);
+            if (owner_info != NULL)
+                printf("%s ", owner_info->pw_name);
+
+            struct group *group_info = getgrgid(entryInfos[i].info.st_gid);
+            if (group_info != NULL)
+                printf("%s", group_info->gr_name);
+
+            printf("%10ld", entryInfos[i].info.st_size);
+
+            char time_buf[80];
+            strftime(time_buf, sizeof(time_buf), "%b %e %H:%M", localtime(&entryInfos[i].info.st_mtime));
+            printf(" %s", time_buf);
+
+            printf(" %s\n", entryInfos[i].entry->d_name);
+        }
+    }
 }
