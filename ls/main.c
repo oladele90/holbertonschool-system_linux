@@ -34,12 +34,12 @@ int main(int argc, char **argv)
 			if (argcount > 1)
 				multiHls = 1;
 		}
+		for (x = 0; (x < folders_count)&& (flag != 'l'); x++)
+				printf("%s\n", folders[x]);
 		if (check == 0 && argc > 1)
 			printf("\n");
 		for (i = 0; i < argcount; i++)
 		{
-			for (x = 0; (x < folders_count)&& (flag != 'l'); x++)
-				printf("%s\n", folders[x]);
 			if (multiHls == 1)
 				printf("%s:\n", arglist[i]);
 			entryInfos = hls(arglist[i], entryInfos);
