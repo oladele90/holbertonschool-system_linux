@@ -24,7 +24,7 @@ def maps_parse(pid):
 def change_mem(pid, search_string, replace_string, heap_start, heap_stop):
 
     """finds and replaces string with new string in memory"""
-    
+
     try:
         with open("/proc/{:d}/mem".format(pid), "r+b") as fi:
             fi.seek(heap_start)
