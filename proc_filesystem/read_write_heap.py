@@ -18,7 +18,7 @@ def maps_parse(pid):
                         [int(x, 16) for x in line.split(" ")[0].split("-")[0]]
                     heap_stop = \
                         [int(x, 16) for x in line.split(" ")[0].split("-")[1]]
-    except Exeption:
+    except Exception:
         exit(1)
     return heap_start, heap_stop
 
@@ -37,7 +37,7 @@ def change_mem(pid, search_string, replace_string, heap_start, heap_stop):
                 fi.write(replace_string.encode() + b'\x00')
             else:
                 exit(1)
-    except Exeption:
+    except Exception:
         exit(1)
 
 if __name__ == "__main__":
