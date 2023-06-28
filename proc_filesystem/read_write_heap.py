@@ -17,7 +17,7 @@ def maps_parse(pid):
                     heap_start = \
                         [int(x, 16) for x in line.split(" ")[0].split("-")[0]]
                     heap_stop = \
-                        [int(x, 16) for x in line.split(" ")[0].split("-")[0]]
+                        [int(x, 16) for x in line.split(" ")[0].split("-")[1]]
     except Exeption:
         exit(1)
     return heap_start, heap_stop
