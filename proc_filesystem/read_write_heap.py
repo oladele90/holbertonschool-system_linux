@@ -14,10 +14,8 @@ def maps_parse(pid):
         with open("/proc/{:d}/maps".format(pid), "r") as f:
             for line in f:
                 if line.endswith("[heap]\n"):
-                    heap_start = \
-                        [int(x, 16) for x in line.split(" ")[0].split("-")[0]]
-                    heap_stop = \
-                        [int(x, 16) for x in line.split(" ")[0].split("-")[1]]
+                    heap_start, heap_stop = \
+                        [int(x, 16) for x in line.split(" ")[0].split("-")]
     except Exception:
         exit(1)
     return heap_start, heap_stop
@@ -26,11 +24,12 @@ def maps_parse(pid):
 def change_mem(pid, search_string, replace_string, heap_start, heap_stop):
 
     """finds and replaces string with new string in memory"""
-
+    
     try:
         with open("/proc/{:d}/mem".format(pid), "r+b") as fi:
             fi.seek(heap_start)
             heap_data = fi.read(heap_stop - heap_start)
+            print("[*] Read {:d} bytes".format(heap_stop - heap_start))
             target = heap_data.find(search_string.encode())
             if target >= 0:
                 fi.seek(heap_start + target)
