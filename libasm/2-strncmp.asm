@@ -3,10 +3,11 @@ BITS 64
 global asm_strncmp
 
 asm_strncmp:
+xor rax, rax
 
 loop_start:
 cmp rdx, 0
-je matbh
+je end
 cmp [rdi], byte 0
 je first_null
 cmp [rsi], byte 0
@@ -20,9 +21,6 @@ inc rdi
 inc rsi
 dec rdx
 jmp loop_start
-matbh:
-xor rax, rax
-jmp end
 
 first_null:
 cmp [rsi], byte 0
@@ -30,7 +28,7 @@ jne less_than
 je end
 
 sec_null:
-cmp [rdi], byte 0 
+cmp [rdi], byte 0
 jne greater_than
 je end
 
