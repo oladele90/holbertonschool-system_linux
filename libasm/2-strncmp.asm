@@ -6,6 +6,7 @@ asm_strncmp:
 xor rax, rax
 mov rbx, rdi
 mov rcx, rsi
+mov rdx, rdx
 xor r8, r8
 
 
@@ -37,11 +38,11 @@ jne greater_than
 je end
 
 less_than:
-sub rax, 1
+mov rax, 1
 jmp end
 
 greater_than:
-sub rax, -1
+mov rax, -1
 jmp end
 
 end:
