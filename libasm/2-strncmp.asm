@@ -7,14 +7,13 @@ xor rax, rax
 mov rbx, rdi
 mov rcx, rsi
 mov rdx, rdx
-xor r8, r8
 
 
 loop_start:
-cmp rdx, r8
+cmp rdx, 0
 je end
-mov al, [rbx]
-mov dl, [rcx]
+mov al, byte [rbx]
+mov dl, byte [rcx]
 cmp al, 0
 je first_null
 cmp dl, 0
@@ -24,7 +23,7 @@ jl less_than
 jg greater_than
 inc rbx
 inc rcx
-inc r8
+dec rdx
 jmp loop_start
 
 first_null:
