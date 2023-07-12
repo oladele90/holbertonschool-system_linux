@@ -4,7 +4,7 @@ global asm_strchr
 
 asm_strchr:
 mov rax, rdi
-movzx ecx, dil
+movzx ecx, sil
 
 loop_start:
 cmp byte [rax], cl
