@@ -10,9 +10,9 @@ mov rcx, rsi
 loop_start:
 mov al, [rbx]
 mov dl, [rcx]
-cmp al, 0
+cmp al, 0x0
 je first_null
-cmp dl, 0
+cmp dl, 0x0
 je sec_null
 cmp al, dl
 jl less_than

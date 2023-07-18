@@ -1,4 +1,4 @@
-#include "elf.h"
+#include "h_elf.h"
 int print_magic(Elf64_Ehdr *elf_head)
 {
     size_t i;

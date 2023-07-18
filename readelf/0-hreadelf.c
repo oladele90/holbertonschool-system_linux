@@ -1,45 +1,38 @@
-#include "elf.h"
+#include "h_elf.h"
 
-void convert_end(char *ptr, size_t size)
+int main(int ac, char **av)
 {
-    size_t tmp, start, end;
+    elf_t new_elf;
+    int fd = 0, rl;
+    char *fn = NULL;
 
-    for (start = 0, end = size - 1; start < end; ++start, --end)
-    {
-        tmp = ptr[start];
-        ptr[start] = ptr[end];
-        ptr[end] = tmp;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    int fd, exit_status = 0;
-    size_t r;
-    elf_t elf_head;
-
-    memset(&elf_head, 0, sizeof(elf_head));
-    if (argc != 2)
-        return (EXIT_FAILURE);
-    fd = open(argv[1], O_RDONLY);
-        if (fd == -1)
-            return (EXIT_FAILURE);
-    r = read(fd, &elf_head.e64, sizeof(elf_head.e64));
-    if (r != sizeof(elf_head.e64))
-        exit_status = EXIT_FAILURE;
-    else
-    {
-        if (IS_32(elf_head.e64))
+    if (ac != 2)
         {
-            lseek(fd, 0, SEEK_SET);
-            r = read(fd, &elf_head.e32, sizeof(elf_head.e32));
-			if (r != sizeof(elf_head.e32))
-                exit_status = EXIT_FAILURE;
-            convert_end((char *) &elf_head, sizeof(elf_head));
-            exit_status = print_head(&elf_head);
+            fprintf(stderr, "./#-hreadelf <file name missing>\n");
+            exit(1);
         }
-    }
+    memset(&new_elf, 0, sizeof(new_elf));
+    fn = av[1];
+    fd = open(fn, O_RDONLY);
+    printf("im fd %d\n", fd);
+    if (fd == -1)
+	{
+		if (errno == ENOENT)
+			fprintf(stderr, ERR_FILE_NOT_FOUND, av[0], fn);
+		else if (errno == EACCES)
+			fprintf(stderr, ERR_NOT_READ, av[0], fn);
+		exit(1);
+	}
+    rl = read(fd, &new_elf.e64, sizeof(new_elf.e64));
+    printf("im rl %d\n", rl);
+    if (sizeof(new_elf.e64) != rl || !is_elf(new_elf.e64))
+	{
+		fprintf(stderr, ERR_NOT_ELF, av[0]);
+		exit(1);
+	}
+    set_arch(&new_elf, fd, av);
+	set_endian(&new_elf);
+	print_head(&new_elf);
     close(fd);
-    printf("endy");
-    return (exit_status);
+    return (0);
 }
