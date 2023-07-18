@@ -1,5 +1,10 @@
 #include "h_elf.h"
 
+/**
+ * switch_all_endian - switches endianess of architecture
+ * @h: header struct to switch
+ * Return: none
+*/
 void switch_all_endian(elf_t *h)
 {
 	if (IS_BE(h->e64))
@@ -36,6 +41,11 @@ void switch_all_endian(elf_t *h)
 	}
 }
 
+/**
+ * switch_endian2 - switches endianness on 2 byte unsigned int
+ * @n: the unsigned int whose bytes to switch
+ * Return: unsigned int with switched bytes
+ */
 unsigned short switch_endian2(unsigned short n)
 {
 	return (((n >> 8)  & 0x00ff) |

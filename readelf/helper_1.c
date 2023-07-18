@@ -1,5 +1,12 @@
 #include "h_elf.h"
 
+/**
+ * set_arch - sets architecture of file either 64 bit or 32
+ * @elf_head: struct
+ * @fd: file descriptor
+ * @av: argument vector holds filename and program name
+ * Return: exit status or 0
+*/
 int set_arch(elf_t *elf_head, int fd, char **av)
 {
 	int rl = 0;
@@ -16,6 +23,12 @@ int set_arch(elf_t *elf_head, int fd, char **av)
 	return (1);
 }
 
+/**
+ * is_elf - checks if file is elf file
+ * @e64: 64 bi elf header
+ * Return: 1 or 0
+*/
+
 int is_elf(Elf64_Ehdr e64)
 {
 	if (e64.e_ident[EI_MAG0] == ELFMAG0 &&
@@ -26,6 +39,11 @@ int is_elf(Elf64_Ehdr e64)
 	return (0);
 }
 
+/**
+ * is_64 - checks if arch is 32 or 64 bit
+ * @e64: struct
+ * Return: 0 or exit status
+*/
 int is_64(Elf64_Ehdr e64)
 {
 	switch (e64.e_ident[EI_CLASS])
@@ -41,6 +59,12 @@ int is_64(Elf64_Ehdr e64)
 	return (0);
 }
 
+/**
+ * set_endian - sets endianess
+ * @elf_head: struct
+ * Return: 1 or 0
+ */
+
 int set_endian(elf_t *elf_head)
 {
 	if (is_little(elf_head->e64))
@@ -49,6 +73,11 @@ int set_endian(elf_t *elf_head)
 	return (1);
 }
 
+/**
+ * is_little - check if endian is little
+ * @e64: 64-bit struct
+ * Return: 0, 1, or exit status
+*/
 int is_little(Elf64_Ehdr e64)
 {
 	switch (e64.e_ident[EI_DATA])

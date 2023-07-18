@@ -1,7 +1,14 @@
 #include "h_elf.h"
+
+/**
+ * print_magic - Prints the magic bytes of the ELF header.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_magic(Elf64_Ehdr *elf_head)
 {
-    size_t i;
+	size_t i;
 
 	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
@@ -10,6 +17,12 @@ int print_magic(Elf64_Ehdr *elf_head)
 	return (0);
 }
 
+/**
+ * print_class - Prints the ELF class information.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_class(Elf64_Ehdr *elf_head)
 {
 	printf("  Class:                             ");
@@ -17,21 +30,27 @@ int print_class(Elf64_Ehdr *elf_head)
 	{
 		case ELFCLASS64:
 			printf("ELF64");
-		break;
+			break;
 		case ELFCLASS32:
 			printf("ELF32");
-		break;
+			break;
 		case ELFCLASSNONE:
 			printf("none");
-		break;
+			break;
 		default:
 			printf("<unknown: %x>", elf_head->e_ident[EI_CLASS]);
-		break;
+			break;
 	}
 	printf("\n");
 	return (0);
 }
 
+/**
+ * print_data - Prints the data encoding of the ELF file.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_data(Elf64_Ehdr *elf_head)
 {
 	printf("  Data:                              ");
@@ -39,21 +58,27 @@ int print_data(Elf64_Ehdr *elf_head)
 	{
 		case ELFDATA2LSB:
 			printf("2's complement, little endian");
-		break;
+			break;
 		case ELFDATA2MSB:
 			printf("2's complement, big endian");
-		break;
+			break;
 		case ELFDATANONE:
 			printf("none");
-		break;
+			break;
 		default:
 			printf("<unknown: %x>", elf_head->e_ident[EI_DATA]);
-		break;
+			break;
 	}
 	printf("\n");
 	return (0);
 }
 
+/**
+ * print_version - Prints the ELF version information.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_version(Elf64_Ehdr *elf_head)
 {
 	printf("  Version:                           %d ",
@@ -66,6 +91,12 @@ int print_version(Elf64_Ehdr *elf_head)
 	return (0);
 }
 
+/**
+ * print_osabi - Prints the operating system and ABI information.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_osabi(Elf64_Ehdr *elf_head)
 {
 	printf("  OS/ABI:                            ");
@@ -100,7 +131,6 @@ int print_osabi(Elf64_Ehdr *elf_head)
 			break;
 		default:
 			return (print_osabi_b(elf_head));
-		break;
 	}
 	printf("\n");
 	return (0);

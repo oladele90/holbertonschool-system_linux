@@ -1,5 +1,11 @@
 #include "h_elf.h"
 
+/**
+ * print_e_version - Prints the ELF version.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_e_version(elf_t *elf_head)
 {
 	printf("  Version:                           0x%lx\n",
@@ -9,6 +15,12 @@ int print_e_version(elf_t *elf_head)
 	return (0);
 }
 
+/**
+ * print_flags - Prints the ELF header flags.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_flags(elf_t *elf_head)
 {
 	printf("  Flags:                             0x");
@@ -41,6 +53,12 @@ int print_flags(elf_t *elf_head)
 	return (0);
 }
 
+/**
+ * print_head - Prints the ELF header information.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_head(elf_t *elf_head)
 {
 	printf("ELF Header:\n");
@@ -59,6 +77,12 @@ int print_head(elf_t *elf_head)
 	return (0);
 }
 
+/**
+ * get_type - Returns a string representation of the ELF file type.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: String representing the ELF file type.
+ */
 char *get_type(elf_t *elf_head)
 {
 	static char buf[32];
@@ -81,6 +105,12 @@ char *get_type(elf_t *elf_head)
 	return (buf);
 }
 
+/**
+ * print_e_phoff_shoff - Prints the program header and section header offsets.
+ * @elf_head: Pointer to the ELF header structure.
+ *
+ * Return: Always 0.
+ */
 int print_e_phoff_shoff(elf_t *elf_head)
 {
 	printf("  Start of program headers:          ");

@@ -10,11 +10,6 @@
 #include <unistd.h>
 #include <limits.h>
 
-/**
- * Elf_t - stores 32/64 structs
- * @e64: 64 bit struct
- * @e32: 32 bit struct
-*/
 #define IS_BE(x) ((x).e_ident[EI_DATA] == ELFDATA2MSB)
 #define ERR_NOT_READ "%s: Error: Input file '%s' is not readable.\n"
 #define ERR_FILE_NOT_FOUND "%s: Error: '%s': No such file\n"
@@ -22,9 +17,16 @@
 #define EGET(x) \
 	(IS_32(elf_head->e64) ? elf_head->e32.x : elf_head->e64.x)
 #define IS_32(x) ((x).e_ident[EI_CLASS] == ELFCLASS32)
+
+/**
+ * struct ElfStructs - stores 32/64 structs
+ * @e64: 64 bit struct
+ * @e32: 32 bit struct
+*/
+
 typedef struct ElfStructs
 {
-    Elf64_Ehdr e64;
+	Elf64_Ehdr e64;
 	Elf32_Ehdr e32;
 } elf_t;
 
