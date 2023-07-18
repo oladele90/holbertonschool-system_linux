@@ -14,7 +14,6 @@ int main(int ac, char **av)
     memset(&elf_head, 0, sizeof(elf_head));
     fn = av[1];
     fd = open(fn, O_RDONLY);
-    printf("im fd %d\n", fd);
     if (fd == -1)
 	{
 		if (errno == ENOENT)
@@ -24,7 +23,6 @@ int main(int ac, char **av)
 		exit(1);
 	}
     rl = read(fd, &elf_head.e64, sizeof(elf_head.e64));
-    printf("im rl %d\n", rl);
     if (sizeof(elf_head.e64) != rl || !is_elf(elf_head.e64))
 	{
 		fprintf(stderr, ERR_NOT_ELF, av[0]);
