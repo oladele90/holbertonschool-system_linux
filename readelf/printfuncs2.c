@@ -26,23 +26,23 @@ int print_osabi_b(Elf64_Ehdr *elf_head)
 
 int print_abiversion(Elf64_Ehdr *elf_head)
 {
-	printf("  ABI Version: %d\n",
+	printf("  ABI Version:                       %d\n",
 		elf_head->e_ident[EI_ABIVERSION]);
 	return (0);
 }
 
 int print_type(elf_t *elf_head)
 {
-	printf("  Type: %s\n", get_type(elf_head));
+	printf("  Type:                              %s\n", get_type(elf_head));
 	return (0);
 }
 
 int print_entry(elf_t *elf_head)
 {
 	if (IS_32(elf_head->e64))
-		printf("  Entry point address: 0x%lx\n", EGET(e_entry));
+		printf("  Entry point address:               0x%lx\n", EGET(e_entry));
 	else
-		printf("  Entry point address: 0x%lx\n", EGET(e_entry));
+		printf("  Entry point address:               0x%lx\n", EGET(e_entry));
 	return (0);
 }
 

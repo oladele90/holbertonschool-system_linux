@@ -49,10 +49,11 @@ char *get_type(elf_t *elf_head);
 int print_abiversion(Elf64_Ehdr *elf_head);
 int print_head(elf_t *elf_head);
 int print_flags(elf_t *elf_head);
+int print_e_phoff_shoff(elf_t *elf_head);
 int is_elf(Elf64_Ehdr e64);
 int is_64(Elf64_Ehdr e64);
 int is_little(Elf64_Ehdr e64);
-int set_arch(elf_t *new_elf, int fd, char **av);
-int set_endian(elf_t *new_elf);
+int set_arch(elf_t *elf_head, int fd, char **av);
+int set_endian(elf_t *elf_head);
 
 #endif

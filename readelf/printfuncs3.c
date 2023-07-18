@@ -11,7 +11,7 @@ int print_e_version(elf_t *elf_head)
 
 int print_flags(elf_t *elf_head)
 {
-	printf("  Flags: 0x");
+	printf("  Flags:                             0x");
 	if (IS_32(elf_head->e64))
 		printf("%lx", (unsigned long)elf_head->e32.e_flags);
 	else
@@ -54,6 +54,7 @@ int print_head(elf_t *elf_head)
 	print_machine(&elf_head->e64);
 	print_e_version(elf_head);
 	print_entry(elf_head);
+	print_e_phoff_shoff(elf_head);
 	print_flags(elf_head);
 	return (0);
 }
@@ -78,4 +79,31 @@ char *get_type(elf_t *elf_head)
 			sprintf(buf, "<unknown>: %x", EGET(e_type));
 	}
 	return (buf);
+}
+
+int print_e_phoff_shoff(elf_t *elf_head)
+{
+	printf("  Start of program headers:          ");
+	if (is_64(elf_head->e64))
+	{
+		printf("%lu (bytes into file)\n",
+			(unsigned long)elf_head->e64.e_phoff);
+	}
+	else
+	{
+		printf("%lu (bytes into file)\n",
+			(unsigned long)elf_head->e32.e_phoff);
+	}
+	printf("  Start of section headers:          ");
+	if (is_64(elf_head->e64))
+	{
+		printf("%lu (bytes into file)\n",
+			(unsigned long)elf_head->e64.e_shoff);
+	}
+	else
+	{
+		printf("%lu (bytes into file)\n",
+			(unsigned long)elf_head->e32.e_shoff);
+	}
+	return (0);
 }

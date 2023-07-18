@@ -2,7 +2,7 @@
 
 int main(int ac, char **av)
 {
-    elf_t new_elf;
+    elf_t elf_head;
     int fd = 0, rl;
     char *fn = NULL;
 
@@ -11,7 +11,7 @@ int main(int ac, char **av)
             fprintf(stderr, "./#-hreadelf <file name missing>\n");
             exit(1);
         }
-    memset(&new_elf, 0, sizeof(new_elf));
+    memset(&elf_head, 0, sizeof(elf_head));
     fn = av[1];
     fd = open(fn, O_RDONLY);
     printf("im fd %d\n", fd);
@@ -23,16 +23,16 @@ int main(int ac, char **av)
 			fprintf(stderr, ERR_NOT_READ, av[0], fn);
 		exit(1);
 	}
-    rl = read(fd, &new_elf.e64, sizeof(new_elf.e64));
+    rl = read(fd, &elf_head.e64, sizeof(elf_head.e64));
     printf("im rl %d\n", rl);
-    if (sizeof(new_elf.e64) != rl || !is_elf(new_elf.e64))
+    if (sizeof(elf_head.e64) != rl || !is_elf(elf_head.e64))
 	{
 		fprintf(stderr, ERR_NOT_ELF, av[0]);
 		exit(1);
 	}
-    set_arch(&new_elf, fd, av);
-	set_endian(&new_elf);
-	print_head(&new_elf);
+    set_arch(&elf_head, fd, av);
+	set_endian(&elf_head);
+	print_head(&elf_head);
     close(fd);
     return (0);
 }

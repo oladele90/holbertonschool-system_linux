@@ -3,7 +3,7 @@ int print_magic(Elf64_Ehdr *elf_head)
 {
     size_t i;
 
-	printf("  Magic: ");
+	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
 		printf("%.2x ", elf_head->e_ident[i]);
 	printf("\n");
@@ -12,7 +12,7 @@ int print_magic(Elf64_Ehdr *elf_head)
 
 int print_class(Elf64_Ehdr *elf_head)
 {
-	printf("  Class: ");
+	printf("  Class:                             ");
 	switch (elf_head->e_ident[EI_CLASS])
 	{
 		case ELFCLASS64:
@@ -34,7 +34,7 @@ int print_class(Elf64_Ehdr *elf_head)
 
 int print_data(Elf64_Ehdr *elf_head)
 {
-	printf("  Data: ");
+	printf("  Data:                              ");
 	switch (elf_head->e_ident[EI_DATA])
 	{
 		case ELFDATA2LSB:
@@ -56,7 +56,7 @@ int print_data(Elf64_Ehdr *elf_head)
 
 int print_version(Elf64_Ehdr *elf_head)
 {
-	printf("  Version: %d ",
+	printf("  Version:                           %d ",
 		elf_head->e_ident[EI_VERSION]);
 	if (elf_head->e_ident[EI_VERSION] == EV_CURRENT)
 		printf("(current)");
@@ -68,7 +68,7 @@ int print_version(Elf64_Ehdr *elf_head)
 
 int print_osabi(Elf64_Ehdr *elf_head)
 {
-	printf("  OS/ABI: ");
+	printf("  OS/ABI:                            ");
 	switch (elf_head->e_ident[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
