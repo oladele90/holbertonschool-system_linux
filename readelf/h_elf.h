@@ -28,6 +28,8 @@ typedef struct ElfStructs
 {
 	Elf64_Ehdr e64;
 	Elf32_Ehdr e32;
+	Elf64_Shdr *es64;
+	Elf32_Shdr *es32;
 } elf_t;
 
 
@@ -57,5 +59,18 @@ int is_64(Elf64_Ehdr e64);
 int is_little(Elf64_Ehdr e64);
 int set_arch(elf_t *elf_head, int fd, char **av);
 int set_endian(elf_t *elf_head);
+int print_section(elf_t *elf_head, int fd);
+int handle_section(elf_t *elf_head, int fd);
+int print_footer(elf_t *elf_head);
+int print_64_section(elf_t *elf_head, int fd);
+int print_32_section(elf_t *elf_head, int fd);
+char *get_type_32(elf_t *elf_head, int i);
+char *get_type_32_2(elf_t *elf_head, int i);
+char *get_type_64(elf_t *elf_head, int i);
+char *get_type_64_2(elf_t *elf_head, int i);
+char *get_flag(elf_t *elf_head, int i);
+char *get_table(elf_t *elf_head, int fd);
+int free_all(elf_t *elf_head);
+void switch_endian_section(elf_t *h, size_t i);
 
 #endif

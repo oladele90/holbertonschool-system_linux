@@ -81,3 +81,33 @@ unsigned long switch_endian8(unsigned long n)
 			((n << 40) & 0x00ff000000000000) |
 			((n << 56) & 0xff00000000000000));
 }
+
+void switch_endian_section(elf_t *h, size_t i)
+{
+	if (IS_BE(h->e64) && !IS_32(h->e64))
+	{
+		h->es64[i].sh_name = switch_endian4(h->es64[i].sh_name);
+		h->es64[i].sh_type = switch_endian4(h->es64[i].sh_type);
+		h->es64[i].sh_flags = switch_endian8(h->es64[i].sh_flags);
+		h->es64[i].sh_addr = switch_endian8(h->es64[i].sh_addr);
+		h->es64[i].sh_offset = switch_endian8(h->es64[i].sh_offset);
+		h->es64[i].sh_size = switch_endian8(h->es64[i].sh_size);
+		h->es64[i].sh_link = switch_endian4(h->es64[i].sh_link);
+		h->es64[i].sh_info = switch_endian4(h->es64[i].sh_info);
+		h->es64[i].sh_addralign = switch_endian8(h->es64[i].sh_addralign);
+		h->es64[i].sh_entsize = switch_endian8(h->es64[i].sh_entsize);
+	}
+	if (IS_BE(h->e64) && IS_32(h->e64))
+	{
+		h->es32[i].sh_name = switch_endian4(h->es32[i].sh_name);
+		h->es32[i].sh_type = switch_endian4(h->es32[i].sh_type);
+		h->es32[i].sh_flags = switch_endian4(h->es32[i].sh_flags);
+		h->es32[i].sh_addr = switch_endian4(h->es32[i].sh_addr);
+		h->es32[i].sh_offset = switch_endian4(h->es32[i].sh_offset);
+		h->es32[i].sh_size = switch_endian4(h->es32[i].sh_size);
+		h->es32[i].sh_link = switch_endian4(h->es32[i].sh_link);
+		h->es32[i].sh_info = switch_endian4(h->es32[i].sh_info);
+		h->es32[i].sh_addralign = switch_endian4(h->es32[i].sh_addralign);
+		h->es32[i].sh_entsize = switch_endian4(h->es32[i].sh_entsize);
+	}
+}
