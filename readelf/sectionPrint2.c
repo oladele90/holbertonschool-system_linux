@@ -1,5 +1,11 @@
 #include "h_elf.h"
 
+/**
+ * get_table - Retrieves the section header string table from the ELF file.
+ * @elf_head: Pointer to the ELF header structure.
+ * @fd: File descriptor of the ELF file.
+ * Return: Pointer to the section header string table.
+ */
 char *get_table(elf_t *elf_head, int fd)
 {
 	char *str;
@@ -31,6 +37,12 @@ char *get_table(elf_t *elf_head, int fd)
 	return (str);
 }
 
+/**
+ * get_flag - Retrieves the string representation of section flags.
+ * @elf_head: Pointer to the ELF header structure.
+ * @i: Index of the section header.
+ * Return: Pointer to the string representation of section flags.
+ */
 char *get_flag(elf_t *elf_head, int i)
 {
 	static char str[6];
@@ -74,6 +86,11 @@ char *get_flag(elf_t *elf_head, int i)
 	return (str);
 }
 
+/**
+ * free_all - Frees the allocated memory for ELF header section headers.
+ * @elf_head: Pointer to the ELF header structure.
+ * Return: Always 0.
+ */
 int free_all(elf_t *elf_head)
 {
 	if (is_64(elf_head->e64))

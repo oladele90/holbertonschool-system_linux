@@ -82,6 +82,13 @@ unsigned long switch_endian8(unsigned long n)
 			((n << 56) & 0xff00000000000000));
 }
 
+/**
+ * switch_endian_section - Switches the endianness of the section at index i.
+ * @h: Pointer to the ELF header structure.
+ * @i: Index of the section header to switch endianness.
+ * Return: none
+ */
+
 void switch_endian_section(elf_t *h, size_t i)
 {
 	if (IS_BE(h->e64) && !IS_32(h->e64))

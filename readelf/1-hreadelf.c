@@ -1,7 +1,7 @@
 #include "h_elf.h"
 
 /**
- * main - displays ELF header info
+ * main - displays ELF section header info
  * @ac: arg count
  * @av: arg vector
  * Return: 0 = Success, or exit status

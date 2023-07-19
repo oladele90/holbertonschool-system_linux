@@ -22,6 +22,8 @@
  * struct ElfStructs - stores 32/64 structs
  * @e64: 64 bit struct
  * @e32: 32 bit struct
+ * @es64: Pointer to an array of 64-bit section header structs.
+ * @es32: Pointer to an array of 32-bit section header structs.
 */
 
 typedef struct ElfStructs

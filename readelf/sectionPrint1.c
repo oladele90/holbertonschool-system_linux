@@ -1,5 +1,12 @@
 #include "h_elf.h"
 
+/**
+ * print_section - Prints the section headers of an ELF file
+ * @elf_head: Pointer to the ELF file header structure
+ * @fd: File descriptor of the ELF file
+ * Return: 0 on success, 1 if no sections are found
+ */
+
 int print_section(elf_t *elf_head, int fd)
 {
 	size_t i = 0;
@@ -24,15 +31,22 @@ int print_section(elf_t *elf_head, int fd)
 			   (unsigned long)elf_head->e32.e_shoff);
 	handle_section(elf_head, fd);
 	printf("\nSection Headers:\n");
-    for (i = 0; i < EGET(e_shnum); i++)
+	for (i = 0; i < EGET(e_shnum); i++)
 		switch_endian_section(elf_head, i);
-    if (is_64(elf_head->e64))
-        print_64_section(elf_head, fd);
-    else
-        print_32_section(elf_head, fd);
+	if (is_64(elf_head->e64))
+		print_64_section(elf_head, fd);
+	else
+		print_32_section(elf_head, fd);
 	print_footer(elf_head);
 	return (0);
 }
+
+/**
+ * handle_section - Handles reading and storing section headers of an ELF file.
+ * @elf_head: Pointer to the ELF file structure.
+ * @fd: File descriptor of the ELF file.
+ * Return: Always 0.
+ */
 
 int handle_section(elf_t *elf_head, int fd)
 {
@@ -66,6 +80,12 @@ int handle_section(elf_t *elf_head, int fd)
 	return (0);
 }
 
+/**
+ * print_footer - Prints the footer of the ELF file section table.
+ * @elf_head: Pointer to the ELF file structure.
+ * Return: Always 0.
+ */
+
 int print_footer(elf_t *elf_head)
 {
 	char *str[] = {"Key to Flags:\n",
@@ -92,6 +112,13 @@ int print_footer(elf_t *elf_head)
 
 	return (0);
 }
+
+/**
+ * print_64_section - Prints the 64-bit ELF file section headers.
+ * @elf_head: Pointer to the ELF file structure.
+ * @fd: File descriptor of the ELF file.
+ * Return: Always 0.
+ */
 
 int print_64_section(elf_t *elf_head, int fd)
 {
@@ -120,6 +147,13 @@ int print_64_section(elf_t *elf_head, int fd)
 	free(str_table);
 	return (0);
 }
+
+/**
+ * print_32_section - Prints the 32-bit ELF file section headers.
+ * @elf_head: Pointer to the ELF file structure.
+ * @fd: File descriptor of the ELF file.
+ * Return: Always 0.
+ */
 
 int print_32_section(elf_t *elf_head, int fd)
 {
