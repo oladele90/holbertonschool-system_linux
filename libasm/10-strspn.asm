@@ -3,63 +3,26 @@ BITS 64
 global asm_strspn
 
 asm_strspn:
-push rdi
-push rsi
-xor rax, rax
-xor rsi, rsi
-xor rcx, rcx
-mov rsi, [rsp]
-mov rdx, rdi
+mov rcx, 0
+mov r8, 0
 
-cmp [rsi], byte 0
-je needle_null
-cmp [rdi], byte 0
-je end
+count1:
+	cmp byte [rdi + rcx], 0
+	je end
 
+	mov rbx, 0
+count2:
+	mov r8b, [rsi + rbx]
+	cmp r8b, 0
+	je end
 
+	inc rbx
+	cmp r8b, [rdi + rcx]
+	jne count2
 
-loop_start:
-movzx r8, byte [rdi + rcx]
-movzx r9, byte [rsi + rcx]
-
-cmp r8b, byte 0
-je needle_null
-
-cmp r9b, byte 0
-jz needle_null
-
-cmp r8, r9
-je counter
-inc rdi
-xor rcx, rcx
-jmp loop_start
-
-sub_loop:
-movzx r8, byte [rdi + rcx]
-movzx r9, byte [rsi + rcx]
-
-cmp r8b, byte 0
-je needle_null
-
-cmp r9b, byte 0
-jz needle_null
-
-cmp r8, r9
-je counter
-jmp end
-
-
-counter:
-inc rcx
-jmp sub_loop
-
-needle_null:
-test r9b, r9b
-jnz end
-mov rax, rcx
+	inc rcx
+	jmp count1
 
 end:
-mov rax, rcx
-pop rsi
-pop rdi
-ret
+	mov rax, rcx
+	ret	
