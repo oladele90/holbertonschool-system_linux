@@ -10,4 +10,6 @@
 
 int handle_signal(void);
 void (*current_handler_signal(void))(int);
+/*void handle_sig(int sig);*/
+int handle_sigaction(void);
 #endif
