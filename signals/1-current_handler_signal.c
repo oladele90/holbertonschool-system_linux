@@ -2,5 +2,8 @@
 
 void (*current_handler_signal(void))(int)
 {
-	return (signal(SIGINT, SIG_DFL));
+    void (*current_handler)(int);
+	current_handler = signal(SIGINT, SIG_DFL);
+    signal(SIGINT, current_handler);
+    return (current_handler);
 }
