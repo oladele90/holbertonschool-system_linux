@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include <time.h>
+#include <string.h>
 
 int handle_signal(void);
 void (*current_handler_signal(void))(int);
