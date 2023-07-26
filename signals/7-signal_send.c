@@ -1,5 +1,12 @@
 #include "signals.h"
 
+/**
+ * main - sends signal to pid of running proccess
+ * @argc: arg count
+ * @argv: arg vector
+ * Return: 0 or 1
+*/
+
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
