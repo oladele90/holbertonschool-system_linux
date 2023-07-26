@@ -7,7 +7,6 @@ void handle_sig(int sig)
 {
 	printf("Caught %d\nSignal recieved\n", sig);
 	fflush(stdout);
-	exit(EXIT_SUCCESS);
 }
 
 /**
