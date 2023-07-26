@@ -4,7 +4,7 @@
 /**
 * pid_exist - check if a pid exist
 * @pid: process id
-* Return: 1 on succes, 0 otherwise
+* Return: 1 or 0
 */
 int pid_exist(pid_t pid)
 {
