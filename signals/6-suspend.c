@@ -5,7 +5,7 @@
  */
 void handle_sig(int sig)
 {
-	printf("Caught %d\nSignal recieved\n", sig);
+	printf("Caught %d\nSignal received\n", sig);
 	fflush(stdout);
 }
 
