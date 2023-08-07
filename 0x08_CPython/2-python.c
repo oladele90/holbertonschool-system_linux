@@ -6,6 +6,11 @@ void print_python_bytes(PyObject *p)
     int i;
     int size = (((PyVarObject*)(p))->ob_size);
     printf("[.] bytes object info\n");
+    if (!PyBytes_Check(p))
+    {
+        printf("  [ERROR] Invalid Bytes Object\n");
+		return;
+    }
     printf("  size: %d\n", size);
     printf("  trying string: %s\n", ((PyBytesObject *)p)->ob_sval);
     if (size > 9)
