@@ -31,10 +31,11 @@ int main(int argc, char **argv)
                 syscall = u_in.orig_rax;
                 printf("%s", syscalls_64_g[syscall].name);
             }
-            if (!flip)
+            if (!flip && (long)u_in.rax != -38)
                 printf("\n");
             ptrace(PTRACE_SYSCALL, child_pid, 0, 0);
         }
+        printf("\n");
     }
     return (0);
 }
