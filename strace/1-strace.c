@@ -29,8 +29,10 @@ int main(int argc, char **argv)
             if (flip)
             {
                 syscall = u_in.orig_rax;
-                printf("%s\n", syscalls_64_g[syscall].name);
+                printf("%s", syscalls_64_g[syscall].name);
             }
+            if (!flip)
+                printf("\n");
             ptrace(PTRACE_SYSCALL, child_pid, 0, 0);
         }
     }
