@@ -10,7 +10,7 @@ OBJS = $(patsubst %.c, %.o, $(SRC))
 
 .PHONY: strace_0 strace_1 strace_2 strace_3 clean
 
-strace0: $(0)
+strace_0: $(0)
 	$(CC) $(CFLAGS) $(0) -o strace_0
 
 strace_1: $(1)
