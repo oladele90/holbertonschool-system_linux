@@ -24,16 +24,16 @@ int main(int argc, char **argv)
         ptrace(PTRACE_SYSCALL, child_pid, 0, 0);
         for (flip = 0; !WIFEXITED(status); flip ^= 1)
         {
-            wait(&status);
             ptrace(PTRACE_GETREGS, child_pid, 0, &u_in);
             if (!flip && count)
             {
                 syscall = u_in.orig_rax;
                 printf("%s", syscalls_64_g[syscall].name);
             }
-            if (!flip && (long)u_in.rax != -38 && count)
+            if (flip && (long)u_in.rax != -38 && count)
                 printf(" = %s%lx\n", u_in.rax?"0x":"", (long)u_in.rax);
             ptrace(PTRACE_SYSCALL, child_pid, 0, 0);
+            wait(&status);
             count = 1;
         }
     }
