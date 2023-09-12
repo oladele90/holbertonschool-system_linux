@@ -11,14 +11,14 @@
  */
 int main(void)
 {
-    pthread_t tid;
+	pthread_t tid;
 
-    pthread_create(&tid, NULL, &thread_entry, "Holberton School");
+	pthread_create(&tid, NULL, &thread_entry, "Holberton School");
 
-    sleep(1);
-    printf("Created thread ID -> %lu\n", tid);
+	sleep(1);
+	printf("Created thread ID -> %lu\n", tid);
 
-    thread_entry("C is fun");
-    printf("Should not be printed\n");
-    return (EXIT_SUCCESS);
+	thread_entry("C is fun");
+	printf("Should not be printed\n");
+	return (EXIT_SUCCESS);
 }
