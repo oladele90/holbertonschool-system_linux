@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "list.h"
+
+extern pthread_mutex_t lock;
+extern pthread_cond_t print_cond;
 
 /**
  * struct pixel_s - RGB pixel
@@ -71,5 +75,6 @@ typedef struct blur_portion_s
 
 void *thread_entry(void *arg);
 int tprintf(char const *format, ...);
+list_t *prime_factors(char const *s);
 
 #endif
