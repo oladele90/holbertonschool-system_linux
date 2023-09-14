@@ -25,7 +25,7 @@ int tprintf(char const *format, ...)
 	pthread_mutex_lock(&lock);
 	va_start(args, format);
 	printf("[%lu]", tid);
-	vprintf(args, format);
+	vprintf(format, args);
 	va_end(args);
 	pthread_mutex_unlock(&lock);
 	return (0);
