@@ -23,7 +23,7 @@ list_t *prime_factors(char const *s)
 		num /= 2;
 	}
 
-	for (i = 3; i * i <= num; i++)
+	for (i = 3; i * i <= num; i += 2)
 	{
 		while (num % i == 0)
 		{
