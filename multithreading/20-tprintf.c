@@ -1,8 +1,8 @@
 #include "multithreading.h"
 
 pthread_mutex_t lock;
-void begin(void) __attribute__((constructor));
-void end(void) __attribute__((destructor));
+static void begin(void) __attribute__((constructor));
+static void end(void) __attribute__((destructor));
 /**
  * tprintf - prints formatted string
  * @format: string to print
