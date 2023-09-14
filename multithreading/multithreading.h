@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdarg.h>
 
 extern pthread_mutex_t lock;
 extern pthread_cond_t print_cond;
