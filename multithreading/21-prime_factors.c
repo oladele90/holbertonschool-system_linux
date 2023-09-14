@@ -1,41 +1,43 @@
 #include "list.h"
 #include "multithreading.h"
+#include "list.h"
 
+/**
+* prime_factors -  factorizes a number into a list of prime factors
+* @s: number to factor
+* Return: list of factors
+*/
 list_t *prime_factors(char const *s)
 {
-    unsigned long num = atoi(s), prime = 2;
-    list_t *list = NULL;
-    list_init(list);
+	list_t *list = NULL;
+	unsigned long num = strtoul(s, NULL, 10), *prime = NULL, i;
 
-    while (num != 0)
-    {
-        if ((num % prime) == 0)
-        {
-            list_add(list, (void *)prime);
-            num = (num / prime);
-        }
-        else 
-            find_next_prime((prime + 1), num);
-    }
-    print_lists(list->head);
-    return (list);
+	list = malloc(sizeof(list_t));
+	list_init(list);
 
-}
+	while (num % 2 == 0)
+	{
+		prime = malloc(sizeof(unsigned long));
+		*prime = 2;
+		list_add(list, prime);
+		num /= 2;
+	}
 
-unsigned long find_next_prime(unsigned long prime, unsigned long num)
-{
-    unsigned long i;
-    
-    for (; prime != num; prime++)
-    {
-        for (i = 2; i < prime; i++)
-        {
-            if ((prime % i) == 0)
-                break;
-        }
-        if (i == prime)
-            return (prime);
-        prime++;
-    }
-    return (0);
+	for (i = 3; i * i < num; i++)
+	{
+		while (num % i == 0)
+		{
+			prime = malloc(sizeof(unsigned long));
+			*prime = i;
+			list_add(list, prime);
+			num /= i;
+		}
+	}
+	if (num > 2)
+	{
+		prime = malloc(sizeof(unsigned long));
+		*prime = num;
+		list_add(list, prime);
+	}
+	return (list);
 }
