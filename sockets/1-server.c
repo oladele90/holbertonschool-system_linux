@@ -10,7 +10,7 @@
 int main(void)
 {
     int sockid;
-    struct sockaddr_in *client = NULL;
+    struct sockaddr_in *client = calloc(1, sizeof(struct sockaddr_in));
     struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
     socklen_t *new = 0;
 
