@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	int socketfd;
 	struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
 	socklen_t addr_size = sizeof(struct sockaddr_in);
-    char *local = "localhost";
+	char *local = "localhost";
 
 	if (argc != 3)
 	{
