@@ -10,9 +10,8 @@
 int main(void)
 {
     int sockid;
-    struct sockaddr_in *client = NULL;
+    struct sockaddr_in *client = calloc(1, sizeof(struct sockaddr_in));
     struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
-    char client_ip[INET_ADDRSTRLEN];
     socklen_t *new = 0;
 
     sockid = socket(PF_INET, SOCK_STREAM, 0);
@@ -21,12 +20,10 @@ int main(void)
     addrport->sin_port = htons(12345);
     bind(sockid, (struct sockaddr *)addrport, sizeof(struct sockaddr_in));
     printf("server listening on port 12345\n");
-    while (1)
+    while (listen(sockid, 8) == 0)
     {
-        listen(sockid, 8);
         accept(sockid, (struct sockaddr *)client ,new);
-        inet_ntop(AF_INET, &(client->sin_addr), client_ip, INET_ADDRSTRLEN);
-        printf("Client connected: %s\n", client_ip);
+        printf("Client connected: %s\n", inet_ntoa(client->sin_addr));
         break;
     }
     return (1);
