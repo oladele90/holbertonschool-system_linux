@@ -16,7 +16,7 @@ int main(void)
     addrport->sin_family = AF_INET;
     addrport->sin_addr.s_addr = INADDR_ANY;
     addrport->sin_port = htons(12345);
-    bind(sockid, (struct sockaddr *)addrport, sizeof(addrport));
+    bind(sockid, (struct sockaddr *)addrport, sizeof(struct sockaddr_in));
     printf("server listening on port 12345\n");
     while (1)
         listen(sockid, 8);
