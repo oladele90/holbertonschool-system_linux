@@ -12,7 +12,7 @@ int main(void)
     int sockid;
     struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
 
-    sockid = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+    sockid = socket(PF_INET, SOCK_STREAM, 0);
     addrport->sin_family = AF_INET;
     addrport->sin_addr.s_addr = INADDR_ANY;
     addrport->sin_port = htons(12345);
