@@ -13,7 +13,7 @@
 
 int main(void)
 {
-	int sockid, c_id;
+	int sockid, c_id, i;
 	struct sockaddr_in *client = calloc(1, sizeof(struct sockaddr_in));
 	struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
 	socklen_t *new = 0;
@@ -34,7 +34,10 @@ int main(void)
         if (count)
         {
             message[count] = '\0';
-            printf("Message received: %s\n", message);
+            printf("Message received: ");
+            for (i = 0; i < (int)count; i++)
+                printf("%c", (char)message[i]);
+            printf("\n");
         }
 		break;
 	}
