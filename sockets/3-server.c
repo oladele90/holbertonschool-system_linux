@@ -13,7 +13,7 @@
 
 int main(void)
 {
-	int sockid, c_id;
+	int sockid;
 	struct sockaddr_in *client = calloc(1, sizeof(struct sockaddr_in));
 	struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
 	socklen_t *new = 0;
@@ -29,9 +29,9 @@ int main(void)
     memset(message, '\0', 1024);
 	while (listen(sockid, 8) == 0)
 	{
-		c_id = accept(sockid, (struct sockaddr *)client, new);
+		accept(sockid, (struct sockaddr *)client, new);
 		printf("Client connected: %s\n", inet_ntoa(client->sin_addr));
-        count = recv(c_id, &message, len, 0);
+        count = recv(sockid, &message, len, 0);
         if (count)
             printf("Message received: %s\n", message);
 		break;
