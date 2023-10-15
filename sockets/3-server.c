@@ -13,28 +13,26 @@
 
 int main(void)
 {
-	int sockid;
-	struct sockaddr_in *client = calloc(1, sizeof(struct sockaddr_in));
-	struct sockaddr_in *addrport = calloc(1, sizeof(struct sockaddr_in));
-	socklen_t *new = 0;
+	int sockid, client_size, server_size;
+	struct sockaddr_in client;
+	struct sockaddr_in addrport;
     char message[1024];
-    size_t len = sizeof(message) - 1, count;
+    size_t len = sizeof(message), count;
 
-	sockid = socket(PF_INET, SOCK_STREAM, 0);
-	addrport->sin_family = AF_INET;
-	addrport->sin_addr.s_addr = INADDR_ANY;
-	addrport->sin_port = htons(12345);
-	bind(sockid, (struct sockaddr *)addrport, sizeof(struct sockaddr_in));
+	sockid = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+	addrport.sin_family = AF_INET;
+	addrport.sin_addr.s_addr = INADDR_ANY;
+	addrport.sin_port = htons(12345);
+	server_size = sizeof(addrport);
+	bind(sockid, (struct sockaddr *) &addrport, server_size);
 	printf("server listening on port 12345\n");
-    memset(message, '\0', 1024);
-	while (listen(sockid, 8) == 0)
-	{
-		accept(sockid, (struct sockaddr *)client, new);
-		printf("Client connected: %s\n", inet_ntoa(client->sin_addr));
-        count = recv(sockid, &message, len, 0);
-        if (count)
-            printf("Message received: %s\n", message);
-		break;
-	}
+	listen(sockid, 8);
+	client_size = sizeof(client);
+	accept(sockid, (struct sockaddr *) &client, (socklen_t *) &client_size);
+	printf("Client connected: %s\n", inet_ntoa(client.sin_addr));
+    count = recv(sockid, &message, len, 0);
+    if (count)
+		message[count] = '\0';
+    printf("Message received: %s\n", message);
 	return (1);
 }
