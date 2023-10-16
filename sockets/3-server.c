@@ -25,7 +25,7 @@ int main(void)
 	addrport.sin_port = htons(12345);
 	server_size = sizeof(addrport);
 	bind(sockid, (struct sockaddr *) &addrport, server_size);
-	printf("server listening on port 12345\n");
+	printf("Server listening on port 12345\n");
 	listen(sockid, 8);
 	client_size = sizeof(client);
 	sockid_c = accept(sockid, (struct sockaddr *) &client, ((socklen_t *
