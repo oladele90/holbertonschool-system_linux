@@ -16,8 +16,8 @@ int main(void)
 	int sockid = 0, sockid_c = 0, client_size = 0, server_size = 0;
 	struct sockaddr_in client;
 	struct sockaddr_in addrport;
-    char message[1024];
-    size_t len = sizeof(message), count;
+	char message[1024];
+	size_t len = sizeof(message), count;
 
 	sockid = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 	addrport.sin_family = AF_INET;
@@ -28,12 +28,13 @@ int main(void)
 	printf("server listening on port 12345\n");
 	listen(sockid, 8);
 	client_size = sizeof(client);
-	sockid_c = accept(sockid, (struct sockaddr *) &client, ((socklen_t *) &client_size));
+	sockid_c = accept(sockid, (struct sockaddr *) &client, ((socklen_t *
+						) &client_size));
 	printf("Client connected: %s\n", inet_ntoa(client.sin_addr));
 	memset(message, '\0', 1024);
 	count = recv(sockid_c, message, len, 0);
-    if (count)
+	if (count)
 		message[count] = '\0';
-    printf("Message received: %s\n", message);
+	printf("Message received: \"%s\"\n", message);
 	return (1);
 }
