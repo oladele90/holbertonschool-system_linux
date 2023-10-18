@@ -1,12 +1,4 @@
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include "stdlib.h"
-#include "stdio.h"
-#include "string.h"
-#include "unistd.h"
-#include "errno.h"
+#include "sockets.h"
 
 void requst_breakdown_printout(void *message)
 {
@@ -27,9 +19,11 @@ void request_res(int sockid_c)
     char response[] = "HTTP/1.1 200 OK\r\n";
     size_t len = sizeof(message), count;
 
+    memset(message, '\0', 1024);
     count = recv(sockid_c, message, len, 0);
 	if (count)
 	{
+        message[count] = '\0';
 		printf("Raw request: \"%s\"\n", message);
         send(sockid_c, response, strlen(response), 0);
         requst_breakdown_printout((void *)message);
@@ -51,9 +45,9 @@ int main(void)
 	server_size = sizeof(addrport);
 	bind(sockid, (struct sockaddr *) &addrport, server_size);
 	printf("Server listening on port 8080\n");
-    while (listen(sockid, 8) == 0)
+    while (1)
     {
-	    
+	    listen(sockid, 8);
 	    client_size = sizeof(client);
 	    sockid_c = accept(sockid, (struct sockaddr *) &client, ((socklen_t *
 	    					) &client_size));
@@ -62,4 +56,3 @@ int main(void)
     }
 	return (1);
 }
-
