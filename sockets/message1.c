@@ -2,11 +2,11 @@
 
 void requst_breakdown_printout(void *message)
 {
-    char *path = NULL;
+    char *path = NULL, *line = NULL;
     char *brk = "\r\n";
 
-    strtok(message, brk);
-    path = strtok(path, " ");
+    line = strtok(message, brk);
+    path = strtok(line, " ");
     printf("%s\n", path);
     fflush(stdout);
 }
