@@ -17,7 +17,7 @@ void requst_breakdown_printout(void *message)
         key = strtok(data, "=");
         value = strtok(NULL, "=");
         printf("Query: \"%s\" -> \"%s\"\n", key, value);
-        data = strtok_r(NULL, brk, &save_ptr);
+        data = strtok_r(NULL, "&", &save_ptr);
     }
     return;
 }
