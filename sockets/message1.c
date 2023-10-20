@@ -11,7 +11,7 @@ void requst_breakdown_printout(void *message)
     all_data = strtok(NULL, " ");
     req_type = strtok(NULL, "\r\n");
     printf("Path: %s\n", path);
-    data = strtok_r(all_data, brk, &save_ptr);
+    data = strtok_r(all_data, "&", &save_ptr);
     while(data && method && req_type)
     {
         key = strtok(data, "=");
