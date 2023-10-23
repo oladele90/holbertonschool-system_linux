@@ -11,7 +11,7 @@ void requst_breakdown_printout(void *message)
     {
         key = strtok(line, ":");
         value = strtok(NULL, "\t");
-        printf("%s -> %s\n", key, value);
+        printf("Header: \"%s\" -> \"%s\"\n", key, value + 1);
         line = strtok_r(NULL, brk, &user_agent_ptr);
     }
 
