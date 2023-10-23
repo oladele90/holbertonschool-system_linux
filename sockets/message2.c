@@ -2,18 +2,20 @@
 
 void requst_breakdown_printout(void *message)
 {
-    char *line = NULL, *user_agent_ptr = NULL, *host = NULL;
-    char *brk = "\r\n", *user = NULL, *accept = NULL;
+    char *line = NULL, *user_agent_ptr = NULL;
+    char *brk = "\r\n";
 
     line = strtok_r(message, brk, &user_agent_ptr);
-    host = strtok_r(NULL, brk, &user_agent_ptr);
-    user = strtok_r(NULL, brk, &user_agent_ptr);
-    accept = strtok_r(NULL, brk, &user_agent_ptr);
+    while (line)
+    {
+        printf("%s\n", line);
+        line = strtok_r(NULL, brk, &user_agent_ptr);
+    }
 
-    printf("%s\n", line);
+    /*printf("%s\n", line);
     printf("%s\n", user);
     printf("%s\n", host);
-    printf("%s\n", accept);
+    printf("%s\n", accept);*/
 }
 /*
 Raw request: "GET /test HTTP/1.1
