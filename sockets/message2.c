@@ -1,8 +1,12 @@
 #include "sockets.h"
 
 void requst_breakdown_printout(void *message)
-{ 
-    printf("%s\n", (char *)message);
+{
+    char *line = NULL, *user_agent_ptr = NULL;
+    char *brk = "\r\n";
+
+    line = strtok_r(NULL, brk, &user_agent_ptr); 
+    printf("%s\n", line);
 }
 /*
 Raw request: "GET /test HTTP/1.1
