@@ -5,7 +5,8 @@ void requst_breakdown_printout(void *message)
     char *line = NULL, *user_agent_ptr = NULL;
     char *brk = "\r\n";
 
-    line = strtok_r(message, brk, &user_agent_ptr);
+    strtok(message, brk);
+    line = strtok_r(NULL, brk, &user_agent_ptr);
     while (line)
     {
         printf("%s\n", line);
